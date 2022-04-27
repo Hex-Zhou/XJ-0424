@@ -56,9 +56,10 @@ scope.addEventListener("mousemove", (e) => {
     // numbers = (posX_Down - e.offsetX) / scope.getBoundingClientRect().width / 3;
     // now_at = now_at + x1_speed * numbers;
     let pos_move = e.offsetX;
-    if ((x1_speed = 4)) {
+
+    if (x1_speed === 4) {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 64 : now_at - x1_speed / 64;
-    } else if ((x1_speed = 2)) {
+    } else if (x1_speed === 2) {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
     } else {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 128 : now_at - x1_speed / 128;
@@ -82,9 +83,9 @@ scope.addEventListener("touchmove", (e) => {
   if (Mouse_Down) {
     should_we_STOP = true;
     let pos_move = e.touches[0].clientX;
-    if ((x1_speed = 4)) {
+    if (x1_speed === 4) {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 64 : now_at - x1_speed / 64;
-    } else if ((x1_speed = 2)) {
+    } else if (x1_speed === 2) {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
     } else {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 128 : now_at - x1_speed / 128;
@@ -234,6 +235,7 @@ function speed_slow() {
   if (x1_speed / 2 > 1) {
     x1_speed /= 2;
   }
+
   DBDraw(Math.floor(now_at));
 }
 
