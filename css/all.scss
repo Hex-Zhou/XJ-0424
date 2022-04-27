@@ -1,0 +1,113 @@
+BODY {
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #3A4B8E;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#buttom_div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+
+    div {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    #btn_ctn {
+        padding-right: 50px;
+        padding-left: 50px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+
+        svg {
+            cursor: pointer;
+        }
+
+        .feq_container {
+            svg {
+                width: 110px;
+                margin-left: 15px;
+            }
+        }
+
+        .control_container {
+            svg {
+                width: 80px;
+            }
+        }
+
+        .logo {
+            svg {
+                width: 200px;
+            }
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #3A4B8E;
+            font-weight: 1000;
+
+        }
+
+    }
+}
+
+
+
+
+
+#scope {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    background-color: #1b2838;
+
+}
+
+
+
+.bordered {
+    padding: 4px;
+    margin-right: 20px;
+    border: 1px solid gray;
+}
+
+@media screen and (max-height:600px) {
+    #buttom_div {
+        #lil_ctn {
+            height: 64px;
+        }
+
+        #btn_ctn {
+
+            button {
+                height: 40px;
+                padding: 0px;
+                margin: 6px;
+                font-size: 28px;
+
+            }
+
+
+        }
+    }
+}
