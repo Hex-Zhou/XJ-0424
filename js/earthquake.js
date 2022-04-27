@@ -55,34 +55,44 @@ scope.addEventListener("mousemove", (e) => {
     should_we_STOP = true;
     // numbers = (posX_Down - e.offsetX) / scope.getBoundingClientRect().width / 3;
     // now_at = now_at + x1_speed * numbers;
+    let pos_move = e.offsetX;
+    if ((x1_speed = 4)) {
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 64 : now_at - x1_speed / 64;
+    } else if ((x1_speed = 2)) {
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
+    } else {
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 128 : now_at - x1_speed / 128;
+    }
 
-    now_at = posX_Down - e.offsetX > 0 ? now_at + x1_speed / 128 : now_at - x1_speed / 128;
-    console.log(now_at);
     now_at = now_at < 0 ? 0 : now_at;
     now_at = now_at > database.length ? database.length : now_at;
 
-    // console.log(now_at + "  " + x1_speed * numbers);
     DBDraw(Math.floor(now_at));
   }
 });
 
 scope.addEventListener("touchstart", (e) => {
   Mouse_Down = true;
-  posX_Down = e.pageX;
+  posX_Down = e.touches[0].clientX;
 });
 scope.addEventListener("touchend", () => {
   Mouse_Down = false;
 });
 scope.addEventListener("touchmove", (e) => {
-  console.log(e.pageX);
   if (Mouse_Down) {
     should_we_STOP = true;
-    now_at = posX_Down - e.pageX > 0 ? now_at + x1_speed / 128 : now_at - x1_speed / 128;
+    let pos_move = e.touches[0].clientX;
+    if ((x1_speed = 4)) {
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 64 : now_at - x1_speed / 64;
+    } else if ((x1_speed = 2)) {
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
+    } else {
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 128 : now_at - x1_speed / 128;
+    }
 
     now_at = now_at < 0 ? 0 : now_at;
     now_at = now_at > database.length ? database.length : now_at;
 
-    // console.log(now_at + "  " + x1_speed * numbers);
     DBDraw(Math.floor(now_at));
   }
 });
@@ -217,7 +227,6 @@ function speed_fast() {
     x1_speed *= 2;
   }
 
-  console.log(x1_speed);
   DBDraw(Math.floor(now_at));
 }
 
@@ -226,8 +235,6 @@ function speed_slow() {
     x1_speed /= 2;
   }
   DBDraw(Math.floor(now_at));
-
-  console.log(x1_speed);
 }
 
 function checkScreen() {
