@@ -10,7 +10,6 @@ setTimeout(() => {
   btn_pause = document.getElementById("btn_pause");
   btn_long = document.getElementById("btn_long");
   btn_short = document.getElementById("btn_short");
-  console.log(btn_start);
   btn_start.addEventListener("click", (e) => {
     connectAudioAPI();
   });

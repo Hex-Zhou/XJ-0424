@@ -12,24 +12,32 @@
 </head>
 
 <body>
-    <div class="canvas_cnt">
-        <canvas id='scope' width='1024' height='1024'></canvas>
-    </div>
-    </div>
-    <div id="buttom_div">
-        <div id="btn_ctn" class="col-12">
-            <h1 class="col-3">顯示週期</h1>
-            <div class="feq_container col-3">
-                <img class="svg" src="img/btn_long.svg" alt="">
-                <img class="svg" src="img/btn_short.svg" alt="">
+    <div class="containers">
+        <div class="head">
+            簡易手作地震儀顯示器
+        </div>
+        <div class="canvas_cnt">
+            <canvas id='scope' width='1024' height='1024'></canvas>
+        </div>
+
+        <div id="buttom_div">
+            <div id="btn_ctn" class="col-12">
+                <h1 class="col-2 col-sm-2 d-flex justify-content-end">顯示週期</h1>
+                <div class="feq_container col-sm-3 col-2 d-flex justify-content-end justify-content-sm-center p-3">
+                    <img class="svg" src="img/btn_long.svg" alt="">
+                    <img class="svg" src="img/btn_short.svg" alt="">
+                </div>
+                <div class="control_container col-3 col-sm-4  justify-content-sm-start"> <img class="svg"
+                        src="img/btn_start.svg" alt="">
+                    <img class="svg" src="img/btn_continue.svg" alt="">
+                    <img class="svg" src="img/btn_pause.svg" alt="">
+                </div>
+                <div class="logo col-sm-3 col-4 d-flex justify-content-end"> <img class="svg" src="img/logo.svg" alt="">
+                </div>
             </div>
-            <div class="control_container col-3"> <img class="svg" src="img/btn_start.svg" alt="">
-                <img class="svg" src="img/btn_continue.svg" alt="">
-                <img class="svg" src="img/btn_pause.svg" alt="">
-            </div>
-            <div class="logo col-3"> <img class="svg" src="img/logo.svg" alt=""></div>
         </div>
     </div>
+
 </body>
 
 </html>
