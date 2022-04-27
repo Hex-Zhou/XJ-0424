@@ -84,11 +84,11 @@ scope.addEventListener("touchmove", (e) => {
     should_we_STOP = true;
     let pos_move = e.touches[0].clientX;
     if (x1_speed === 4) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 64 : now_at - x1_speed / 64;
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
     } else if (x1_speed === 2) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 8 : now_at - x1_speed / 8;
     } else {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 128 : now_at - x1_speed / 128;
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
     }
 
     now_at = now_at < 0 ? 0 : now_at;
@@ -226,6 +226,7 @@ function btn_go() {
 function speed_fast() {
   if (x1_speed * 2 < 512) {
     x1_speed *= 2;
+    console.log(x1_speed);
   }
 
   DBDraw(Math.floor(now_at));
@@ -234,6 +235,7 @@ function speed_fast() {
 function speed_slow() {
   if (x1_speed / 2 > 1) {
     x1_speed /= 2;
+    console.log(x1_speed);
   }
 
   DBDraw(Math.floor(now_at));
