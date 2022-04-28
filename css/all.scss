@@ -21,9 +21,9 @@ BODY {
     background-color: #3A4B8E;
     height: 100vh;
     width: 100vw;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 
     .head {
         display: flex;
@@ -154,6 +154,7 @@ BODY {
 
                 .control_container {
                     svg {
+                        margin-left: 5px;
                         width: 50px;
                     }
                 }
@@ -162,7 +163,7 @@ BODY {
                     font-size: 30px;
                     color: #3A4B8E;
                     font-weight: 1000;
-
+                    padding-right: 20px;
                 }
 
                 .logo {
@@ -186,6 +187,7 @@ BODY {
 
 
         #buttom_div {
+            display: flex;
 
             #btn_ctn {
                 .feq_container {
@@ -196,14 +198,17 @@ BODY {
                 }
 
                 .control_container {
+                    flex: 1;
+
                     svg {
-                        width: 35px;
+                        width: 45px;
                     }
                 }
 
                 h1 {
                     line-height: 50%;
-                    font-size: 16px;
+                    font-size: 24px;
+                    white-space: nowrap;
                     color: #3A4B8E;
                     font-weight: 1000;
 

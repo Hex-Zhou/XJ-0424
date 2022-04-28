@@ -58,11 +58,15 @@ scope.addEventListener("mousemove", (e) => {
     let pos_move = e.offsetX;
 
     if (x1_speed === 4) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 8 : now_at - x1_speed / 8;
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 8 : now_at - 1 / 8;
     } else if (x1_speed === 2) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 4 : now_at - x1_speed / 4;
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 8 : now_at - 1 / 8;
+    } else if (x1_speed === 0.5) {
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 4 : now_at - 1 / 4;
+    } else if (x1_speed === 1) {
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 4 : now_at - 1 / 4;
     } else {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
     }
     posX_Down = pos_move;
     now_at = now_at < 0 ? 0 : now_at;
@@ -85,11 +89,15 @@ scope.addEventListener("touchmove", (e) => {
     let pos_move = e.touches[0].clientX;
 
     if (x1_speed === 4) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 8 : now_at - x1_speed / 8;
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 8 : now_at - 1 / 8;
     } else if (x1_speed === 2) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 4 : now_at - x1_speed / 4;
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 8 : now_at - 1 / 8;
+    } else if (x1_speed === 0.5) {
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 4 : now_at - 1 / 4;
+    } else if (x1_speed === 1) {
+      now_at = posX_Down - pos_move > 0 ? now_at + 1 / 4 : now_at - 1 / 4;
     } else {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
     }
     posX_Down = pos_move;
     now_at = now_at < 0 ? 0 : now_at;
@@ -201,7 +209,7 @@ function DBDraw(xxx) {
   if (xxx - x1_speed < 0) {
   } else {
     for (let i = xxx - x1_speed; i < xxx; i++) {
-      var timeData1 = database[i];
+      var timeData1 = database[Math.floor(i)];
       if (X_now >= 1024) {
         clearCTX();
         X_now = 0;
@@ -234,7 +242,7 @@ function speed_fast() {
 }
 
 function speed_slow() {
-  if (x1_speed / 2 > 1) {
+  if (x1_speed / 2 > 1 / 4) {
     x1_speed /= 2;
     console.log(x1_speed);
   }
@@ -251,3 +259,32 @@ function checkScreen() {
   }
   return true;
 }
+
+let btn_start = document.getElementById("btn_start");
+let btn_continue = document.getElementById("btn_continue");
+let btn_pause = document.getElementById("btn_pause");
+let btn_long = document.getElementById("btn_long");
+let btn_short = document.getElementById("btn_short");
+
+setTimeout(() => {
+  btn_start = document.getElementById("btn_start");
+  btn_continue = document.getElementById("btn_continue");
+  btn_pause = document.getElementById("btn_pause");
+  btn_long = document.getElementById("btn_long");
+  btn_short = document.getElementById("btn_short");
+  btn_start.addEventListener("click", (e) => {
+    connectAudioAPI();
+  });
+  btn_continue.addEventListener("click", (e) => {
+    btn_go();
+  });
+  btn_pause.addEventListener("click", (e) => {
+    btn_stop();
+  });
+  btn_long.addEventListener("click", (e) => {
+    speed_fast();
+  });
+  btn_short.addEventListener("click", (e) => {
+    speed_slow();
+  });
+}, 100);
