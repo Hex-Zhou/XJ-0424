@@ -46,6 +46,7 @@ BODY {
     }
 
     #buttom_div {
+
         height: 25%;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
@@ -64,6 +65,8 @@ BODY {
 
 
         #btn_ctn {
+
+
             padding-right: 50px;
             padding-left: 50px;
             width: 100%;
@@ -72,24 +75,38 @@ BODY {
 
 
             svg {
+                margin-left: 15px;
                 cursor: pointer;
             }
 
             .feq_container {
+
+                display: flex;
+                flex-wrap: nowrap;
+
                 svg {
                     width: 110px;
-                    margin-left: 15px;
+
                 }
             }
 
             .control_container {
+                display: flex;
+                flex-wrap: nowrap;
+
+
                 svg {
-                    width: 80px;
+                    width: 90px;
                 }
             }
 
             .logo {
+                margin-left: auto;
+
+
+
                 svg {
+
                     width: 400px;
                 }
             }
@@ -115,7 +132,7 @@ BODY {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
+            font-size: 30px;
             color: #3A4B8E;
             font-weight: 1000;
             border-top-right-radius: 10px;
@@ -130,19 +147,19 @@ BODY {
             #btn_ctn {
                 .feq_container {
                     svg {
-                        width: 45px;
+                        width: 50px;
                         margin-left: 2px;
                     }
                 }
 
                 .control_container {
                     svg {
-                        width: 45px;
+                        width: 50px;
                     }
                 }
 
                 h1 {
-                    font-size: 20px;
+                    font-size: 30px;
                     color: #3A4B8E;
                     font-weight: 1000;
 
@@ -157,4 +174,61 @@ BODY {
             }
         }
     }
+}
+
+@media screen and (max-height:400px) {
+    .containers {
+        .head {
+
+            font-size: 30px;
+
+        }
+
+
+        #buttom_div {
+
+            #btn_ctn {
+                .feq_container {
+                    svg {
+                        width: 50px;
+                        margin-left: 2px;
+                    }
+                }
+
+                .control_container {
+                    svg {
+                        width: 35px;
+                    }
+                }
+
+                h1 {
+                    line-height: 50%;
+                    font-size: 16px;
+                    color: #3A4B8E;
+                    font-weight: 1000;
+
+                }
+
+                .logo {
+                    svg {
+                        width: 150px;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width:900px) {
+    .containers {
+        #buttom_div {
+            #btn_ctn {
+                .control_container {
+                    svg {}
+                }
+            }
+        }
+    }
+
 }
