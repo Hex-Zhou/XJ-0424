@@ -17,7 +17,7 @@ BODY {
 
 
 .containers {
-
+    visibility: hidden;
     background-color: #3A4B8E;
     height: 100vh;
     width: 100vw;
@@ -128,11 +128,15 @@ BODY {
 
 @media screen and (max-height:600px) {
     .containers {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+
         .head {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 30px;
+            font-size: 24px;
             color: #3A4B8E;
             font-weight: 1000;
             border-top-right-radius: 10px;
@@ -160,7 +164,7 @@ BODY {
                 }
 
                 h1 {
-                    font-size: 30px;
+                    font-size: 24px;
                     color: #3A4B8E;
                     font-weight: 1000;
                     padding-right: 20px;

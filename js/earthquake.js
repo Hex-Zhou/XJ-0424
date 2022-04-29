@@ -1,9 +1,16 @@
 var AudioContext = window.AudioContext || window.webkitAudioContext || false;
 // 跨瀏覽器
 window.onload = () => {
+  document.getElementsByClassName("containers")[0].style.visibility = "visible";
   clearCTX();
   resizeCanvas();
 };
+// 按鈕
+let btn_start = document.getElementById("btn_start");
+let btn_continue = document.getElementById("btn_continue");
+let btn_pause = document.getElementById("btn_pause");
+let btn_long = document.getElementById("btn_long");
+let btn_short = document.getElementById("btn_short");
 // 畫布
 const ctx = document.getElementById("scope").getContext("2d");
 const width = 1024;
@@ -193,12 +200,12 @@ function GetData() {
   // drawScope(timeData1);
 }
 
-window.addEventListener("resize", resizeCanvas, false);
+window.addEventListener("resize", resizeCanvas);
 function resizeCanvas() {
   let canvas_cnt = document.getElementsByClassName("canvas_cnt")[0];
-
   document.getElementById("scope").style.width = canvas_cnt.getBoundingClientRect().width - 90 + "px";
   document.getElementById("scope").style.height = canvas_cnt.getBoundingClientRect().height + "px";
+  checkScreen();
 }
 
 function clearCTX() {
@@ -230,6 +237,9 @@ function btn_stop() {
 
 function btn_go() {
   should_we_STOP = false;
+  if (!start) {
+    connectAudioAPI();
+  }
 }
 
 function speed_fast() {
@@ -254,17 +264,15 @@ function checkScreen() {
   let width = body[0].getBoundingClientRect().width;
   let height = body[0].getBoundingClientRect().height;
   if (height > width) {
+    document.getElementsByClassName("containers")[0].style.visibility = "hidden";
     alert("請橫向擺放，直向我無法啟動...");
     return false;
   }
+  document.getElementsByClassName("containers")[0].style.visibility = "visible";
+  clearCTX();
+
   return true;
 }
-
-let btn_start = document.getElementById("btn_start");
-let btn_continue = document.getElementById("btn_continue");
-let btn_pause = document.getElementById("btn_pause");
-let btn_long = document.getElementById("btn_long");
-let btn_short = document.getElementById("btn_short");
 
 setTimeout(() => {
   btn_start = document.getElementById("btn_start");
@@ -287,4 +295,5 @@ setTimeout(() => {
   btn_short.addEventListener("click", (e) => {
     speed_slow();
   });
-}, 100);
+  checkScreen();
+}, 1000);

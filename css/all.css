@@ -18,6 +18,7 @@ BODY {
 }
 
 .containers {
+  visibility: hidden;
   background-color: #3A4B8E;
   height: 100vh;
   width: 100vw;
@@ -138,6 +139,11 @@ BODY {
 }
 
 @media screen and (max-height: 600px) {
+  .containers {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+  }
   .containers .head {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -148,7 +154,7 @@ BODY {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    font-size: 30px;
+    font-size: 24px;
     color: #3A4B8E;
     font-weight: 1000;
     border-top-right-radius: 10px;
@@ -165,7 +171,7 @@ BODY {
     width: 50px;
   }
   .containers #buttom_div #btn_ctn h1 {
-    font-size: 30px;
+    font-size: 24px;
     color: #3A4B8E;
     font-weight: 1000;
     padding-right: 20px;
