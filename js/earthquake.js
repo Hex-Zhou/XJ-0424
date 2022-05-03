@@ -218,24 +218,27 @@ function clearCTX() {
 
 function ContiDraw(xxx) {
   var timeData1 = database[xxx - 1];
-  if (xxx % 3 != 0) {
-    return;
-  }
-  console.log(xxx);
+  // if (xxx % 3 != 0) {
+  //   return;
+  // }
   if (X_now >= 1024) {
     clearCTX();
     X_now = 0;
   }
   ctx.beginPath();
+  let counter = 0; //max =1024
   for (var x = 0; x < 1024; x++) {
-    ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
+    if (x % 1 == 0) {
+      ctx.lineTo(X_now + counter / x1_speed, timeData1[x] * 4);
+      counter++;
+    }
   }
-
-  X_now = X_now + 1024 / x1_speed;
+  X_now = X_now + counter / x1_speed;
   ctx.stroke();
 }
 
 function DBDraw(xxx) {
+  console.log(xxx);
   if (xxx - x1_speed < 0) {
   } else {
     X_now = 1024;
@@ -248,9 +251,9 @@ function DBDraw(xxx) {
       ctx.beginPath();
       for (var x = 0; x < 1024; x++) {
         ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
+        X_now = X_now + 1024 / x1_speed;
+        ctx.stroke();
       }
-      X_now = X_now + 1024 / x1_speed;
-      ctx.stroke();
     }
   }
 }
