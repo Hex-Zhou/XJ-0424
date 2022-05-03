@@ -18,10 +18,10 @@ const height = 1024;
 // 畫布x軸 0~1023
 let X_now = 0;
 // 速度參數 數字越大，畫布呈現範圍越大，波型越擠
-let x1_speed = 8;
+let x1_speed = 16;
 ctx.fillStyle = "rgb(3,59,80)";
 ctx.strokeStyle = "rgb(1,255,241)";
-ctx.lineWidth = 1;
+ctx.lineWidth = 2;
 var background = new Image();
 background.src = "img/bg_grid.svg";
 // 網頁
@@ -43,6 +43,7 @@ var Mouse_Down = false; //滑鼠是否按著
 var start = false;
 var posX_Down = 0;
 var now_at = 0;
+let timeToggle = true;
 function asdc() {}
 
 scope.addEventListener("mousedown", (e) => {
@@ -104,7 +105,7 @@ scope.addEventListener("touchmove", (e) => {
     } else if (x1_speed === 1) {
       now_at = posX_Down - pos_move > 0 ? now_at + 1 / 4 : now_at - 1 / 4;
     } else {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
+      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
     }
     posX_Down = pos_move;
     now_at = now_at < 0 ? 0 : now_at;
@@ -122,10 +123,7 @@ function buttom_div_height() {
   return document.getElementById("buttom_div").getBoundingClientRect().height;
 }
 function lil_ctn_real_left() {
-  return (
-    document.getElementById("lil_ctn").getBoundingClientRect().left -
-    document.getElementById("buttom_div").getBoundingClientRect().left
-  );
+  return document.getElementById("lil_ctn").getBoundingClientRect().left - document.getElementById("buttom_div").getBoundingClientRect().left;
 }
 
 //跑流程
@@ -176,9 +174,10 @@ function gotStream(stream) {
     resizeCanvas();
     clearCTX();
     javascriptNode.connect(context.destination);
+
     javascriptNode.onaudioprocess = function () {
       // 接收到音頻訊號後，暫停/繼續?
-      if (!should_we_STOP) {
+      if (!should_we_STOP && timeToggle) {
         GetData();
       }
     };
@@ -186,6 +185,11 @@ function gotStream(stream) {
     alert("In gotStream : " + e);
   }
 }
+
+setInterval(() => {
+  // timeToggle = !timeToggle;
+  timeToggle = true;
+}, 10);
 
 var database = [];
 
@@ -196,7 +200,7 @@ function GetData() {
   analyser1.getByteTimeDomainData(timeData1);
   // 取得音頻數據 後 繪製最新數據
   now_at = database.length;
-  DBDraw(now_at);
+  ContiDraw(now_at);
   // drawScope(timeData1);
 }
 
@@ -212,9 +216,29 @@ function clearCTX() {
   ctx.drawImage(background, 0, 0, 1024, 1024);
 }
 
+function ContiDraw(xxx) {
+  var timeData1 = database[xxx - 1];
+  if (xxx % 3 != 0) {
+    return;
+  }
+  console.log(xxx);
+  if (X_now >= 1024) {
+    clearCTX();
+    X_now = 0;
+  }
+  ctx.beginPath();
+  for (var x = 0; x < 1024; x++) {
+    ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
+  }
+
+  X_now = X_now + 1024 / x1_speed;
+  ctx.stroke();
+}
+
 function DBDraw(xxx) {
   if (xxx - x1_speed < 0) {
   } else {
+    X_now = 1024;
     for (let i = xxx - x1_speed; i < xxx; i++) {
       var timeData1 = database[Math.floor(i)];
       if (X_now >= 1024) {
