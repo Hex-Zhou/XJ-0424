@@ -196,12 +196,12 @@ var database = [];
 function GetData() {
   var timeData1 = new Uint8Array(analyser1.frequencyBinCount);
   // 將數據 存入 數據陣列 以備未來使用
+
   database.push(timeData1);
   analyser1.getByteTimeDomainData(timeData1);
   // 取得音頻數據 後 繪製最新數據
   now_at = database.length;
   ContiDraw(now_at);
-  // drawScope(timeData1);
 }
 
 window.addEventListener("resize", resizeCanvas);
@@ -217,20 +217,22 @@ function clearCTX() {
 }
 
 function ContiDraw(xxx) {
-  var timeData1 = database[xxx - 1];
-  if (xxx % 3 != 0) {
+  if (xxx % 4 != 0) {
     return;
   }
-  console.log(xxx);
+  var timeData1 = database[xxx - 1];
+
   if (X_now >= 1024) {
     clearCTX();
     X_now = 0;
   }
   ctx.beginPath();
-  for (var x = 0; x < 1024; x++) {
-    ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
-  }
 
+  for (var x = 0; x < 1024; x++) {
+    if (x % 4 != 0) {
+      ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
+    }
+  }
   X_now = X_now + 1024 / x1_speed;
   ctx.stroke();
 }
