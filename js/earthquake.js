@@ -44,7 +44,7 @@ var start = false;
 var posX_Down = 0;
 var now_at = 0;
 let timeToggle = true;
-function asdc() {}
+let counterFilter = 0;
 
 scope.addEventListener("mousedown", (e) => {
   Mouse_Down = true;
@@ -194,14 +194,17 @@ setInterval(() => {
 var database = [];
 
 function GetData() {
-  var timeData1 = new Uint8Array(analyser1.frequencyBinCount);
-  // 將數據 存入 數據陣列 以備未來使用
-
-  database.push(timeData1);
-  analyser1.getByteTimeDomainData(timeData1);
-  // 取得音頻數據 後 繪製最新數據
-  now_at = database.length;
-  ContiDraw(now_at);
+  counterFilter++;
+  if (counterFilter % 4 == 0) {
+    var timeData1 = new Uint8Array(analyser1.frequencyBinCount);
+    // 將數據 存入 數據陣列 以備未來使用
+    ChecklineWidth();
+    database.push(timeData1);
+    analyser1.getByteTimeDomainData(timeData1);
+    // 取得音頻數據 後 繪製最新數據
+    now_at = database.length;
+    ContiDraw(now_at);
+  }
 }
 
 window.addEventListener("resize", resizeCanvas);
@@ -218,27 +221,21 @@ function clearCTX() {
 
 function ContiDraw(xxx) {
   var timeData1 = database[xxx - 1];
-  // if (xxx % 3 != 0) {
-  //   return;
-  // }
+
   if (X_now >= 1024) {
     clearCTX();
     X_now = 0;
   }
   ctx.beginPath();
-  let counter = 0; //max =1024
+
   for (var x = 0; x < 1024; x++) {
-    if (x % 1 == 0) {
-      ctx.lineTo(X_now + counter / x1_speed, timeData1[x] * 4);
-      counter++;
-    }
+    ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
   }
-  X_now = X_now + counter / x1_speed;
+  X_now = X_now + 1024 / x1_speed;
   ctx.stroke();
 }
 
 function DBDraw(xxx) {
-  console.log(xxx);
   if (xxx - x1_speed < 0) {
   } else {
     X_now = 1024;
@@ -251,9 +248,9 @@ function DBDraw(xxx) {
       ctx.beginPath();
       for (var x = 0; x < 1024; x++) {
         ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
-        X_now = X_now + 1024 / x1_speed;
-        ctx.stroke();
       }
+      X_now = X_now + 1024 / x1_speed;
+      ctx.stroke();
     }
   }
 }
@@ -274,7 +271,7 @@ function speed_fast() {
     x1_speed *= 2;
     console.log(x1_speed);
   }
-
+  ChecklineWidth();
   DBDraw(Math.floor(now_at));
 }
 
@@ -283,7 +280,7 @@ function speed_slow() {
     x1_speed /= 2;
     console.log(x1_speed);
   }
-
+  ChecklineWidth();
   DBDraw(Math.floor(now_at));
 }
 
@@ -324,3 +321,12 @@ setTimeout(() => {
   });
   checkScreen();
 }, 1000);
+
+function ChecklineWidth() {
+  if (x1_speed >= 32) {
+    ctx.lineWidth = 2;
+  }
+  if (x1_speed < 32) {
+    ctx.lineWidth = 3;
+  }
+}
