@@ -17,8 +17,9 @@ const width = 1024;
 const height = 1024;
 // 畫布x軸 0~1023
 let X_now = 0;
+let omitValue = 512;
 // 速度參數 數字越大，畫布呈現範圍越大，波型越擠
-let x1_speed = 128;
+let x1_speed = 256;
 ctx.fillStyle = "rgb(3,59,80)";
 ctx.strokeStyle = "rgb(1,255,241)";
 ctx.lineWidth = 2;
@@ -69,7 +70,7 @@ scope.addEventListener("mousemove", (e) => {
     } else if (x1_speed >= 4) {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
     } else if (x1_speed >= 64) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
+      now_at = posX_Down - pos_move > 0 ? now_at + 64 : now_at - 64;
     }
     posX_Down = pos_move;
     now_at = now_at < 0 ? 0 : now_at;
@@ -99,7 +100,7 @@ scope.addEventListener("touchmove", (e) => {
     } else if (x1_speed >= 4) {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
     } else if (x1_speed >= 64) {
-      now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 32 : now_at - x1_speed / 32;
+      now_at = posX_Down - pos_move > 0 ? now_at + 64 : now_at - 64;
     }
     posX_Down = pos_move;
     now_at = now_at < 0 ? 0 : now_at;
@@ -199,8 +200,8 @@ function ContiDraw(xxx) {
   }
 
   ctx.lineTo(X_now, timeData1[0] * 4);
-  for (var x = 0; x < 1024; x++) {
-    if (x % 512 == 0) {
+  for (var x = 0; x < 1024; x += omitValue) {
+    if (x % omitValue == 0) {
       ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
     }
   }
@@ -220,8 +221,8 @@ function DBDraw(xxx) {
       }
 
       ctx.lineTo(X_now, timeData1[0] * 4);
-      for (var x = 0; x < 1024; x++) {
-        if (x % 512 == 0) {
+      for (var x = 0; x < 1024; x += omitValue) {
+        if (x % omitValue == 0) {
           ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
         }
       }
@@ -291,8 +292,8 @@ setTimeout(() => {
   checkScreen();
 }, 1000);
 function ChecklineWidth() {
-  if (x1_speed >= 32) {
-    ctx.lineWidth = 4;
+  if (x1_speed >= 128) {
+    ctx.lineWidth = 1.5;
   }
   if (x1_speed < 32) {
     ctx.lineWidth = 3;
