@@ -18,9 +18,9 @@ const height = 1024;
 // 畫布x軸 0~1023
 let X_now = 0;
 let omitValue = 1024; // 簡化波形程度
+let exaggerate = 3; //誇大振幅比
 let OverToggle = 0;
 let LastPoint = 0;
-let exaggerate = 2.3; //誇大振幅比例
 // 速度參數 數字越大，畫布呈現範圍越大，波型越擠
 let x1_speed = 256;
 ctx.fillStyle = "rgb(3,59,80)";
@@ -73,7 +73,7 @@ scope.addEventListener("mousemove", (e) => {
     } else if (x1_speed >= 4) {
       now_at = posX_Down - pos_move > 0 ? now_at + x1_speed / 16 : now_at - x1_speed / 16;
     } else if (x1_speed >= 64) {
-      now_at = posX_Down - pos_move > 0 ? now_at + 64 : now_at - 64;
+      now_at = posX_Down - pos_move > 0 ? now_at + 128 : now_at - 128;
     }
     posX_Down = pos_move;
     now_at = now_at < 0 ? 0 : now_at;
@@ -202,7 +202,7 @@ function ContiDraw(xxx) {
     X_now = 0;
   }
   OverToggle++;
-  if (OverToggle % 3 == 0) {
+  if (OverToggle % 8 == 0) {
     ctx.lineTo(X_now, LastPoint * 4);
   } else {
     tmp = 128 + (timeData1[0] - 128) * exaggerate;
@@ -229,7 +229,7 @@ function DBDraw(xxx) {
         X_now = 0;
       }
       OverToggle++;
-      if (OverToggle % 2 == 0) {
+      if (OverToggle % 8 == 0) {
         ctx.lineTo(X_now, LastPoint * 4);
       } else {
         tmp = 128 + (timeData1[0] - 128) * exaggerate;
@@ -284,11 +284,14 @@ function checkScreen() {
   return true;
 }
 setTimeout(() => {
+  btn_little = document.getElementById("btn_little");
+  btn_big = document.getElementById("btn_big");
   btn_start = document.getElementById("btn_start");
   btn_continue = document.getElementById("btn_continue");
   btn_pause = document.getElementById("btn_pause");
   btn_long = document.getElementById("btn_long");
   btn_short = document.getElementById("btn_short");
+
   btn_start.addEventListener("click", (e) => {
     connectAudioAPI();
   });
@@ -304,8 +307,19 @@ setTimeout(() => {
   btn_short.addEventListener("click", (e) => {
     speed_slow();
   });
+  btn_big.addEventListener("click", (e) => {
+    exaggerate += 0.5;
+    exaggerate = exaggerate >= 10 ? 10 : exaggerate;
+    console.log(exaggerate);
+  });
+  btn_little.addEventListener("click", (e) => {
+    exaggerate -= 0.5;
+    exaggerate = exaggerate <= 1 ? 1 : exaggerate;
+    console.log(exaggerate);
+  });
   checkScreen();
 }, 1000);
+
 function ChecklineWidth() {
   if (x1_speed >= 128) {
     ctx.lineWidth = 1.5;

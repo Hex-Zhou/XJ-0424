@@ -23,6 +23,19 @@ BODY {
     padding-top: 20px;
 
     .head {
+        .title {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        svg {
+            width: 72px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -124,6 +137,10 @@ BODY {
             border-top-left-radius: 10px;
             background-color: #fff;
             height: 10%;
+
+            svg {
+                width: 30px;
+            }
         }
 
         #buttom_div {

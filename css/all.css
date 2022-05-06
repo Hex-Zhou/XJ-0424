@@ -46,6 +46,19 @@ BODY {
   height: 10%;
 }
 
+.containers .head .title {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.containers .head svg {
+  width: 72px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
 .containers .canvas_cnt {
   height: 60%;
   display: -webkit-box;
@@ -161,6 +174,9 @@ BODY {
     border-top-left-radius: 10px;
     background-color: #fff;
     height: 10%;
+  }
+  .containers .head svg {
+    width: 30px;
   }
   .containers #buttom_div #btn_ctn .feq_container svg {
     width: 50px;
