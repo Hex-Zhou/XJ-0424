@@ -17,7 +17,10 @@ const width = 1024;
 const height = 1024;
 // 畫布x軸 0~1023
 let X_now = 0;
-let omitValue = 512;
+let omitValue = 1024; // 簡化波形程度
+let OverToggle = 0;
+let LastPoint = 0;
+let exaggerate = 2.3; //誇大振幅比例
 // 速度參數 數字越大，畫布呈現範圍越大，波型越擠
 let x1_speed = 256;
 ctx.fillStyle = "rgb(3,59,80)";
@@ -198,11 +201,17 @@ function ContiDraw(xxx) {
     clearCTX();
     X_now = 0;
   }
-
-  ctx.lineTo(X_now, timeData1[0] * 4);
-  for (var x = 0; x < 1024; x += omitValue) {
-    if (x % omitValue == 0) {
-      ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
+  OverToggle++;
+  if (OverToggle % 3 == 0) {
+    ctx.lineTo(X_now, LastPoint * 4);
+  } else {
+    tmp = 128 + (timeData1[0] - 128) * exaggerate;
+    ctx.lineTo(X_now, tmp * 4);
+    for (var x = 0; x < 1024; x += omitValue) {
+      if (x % omitValue == 0) {
+        LastPoint = 128 + (timeData1[x] - 128) * exaggerate;
+        ctx.lineTo(X_now + x / x1_speed, LastPoint * 4);
+      }
     }
   }
 
@@ -219,11 +228,17 @@ function DBDraw(xxx) {
         clearCTX();
         X_now = 0;
       }
-
-      ctx.lineTo(X_now, timeData1[0] * 4);
-      for (var x = 0; x < 1024; x += omitValue) {
-        if (x % omitValue == 0) {
-          ctx.lineTo(X_now + x / x1_speed, timeData1[x] * 4);
+      OverToggle++;
+      if (OverToggle % 2 == 0) {
+        ctx.lineTo(X_now, LastPoint * 4);
+      } else {
+        tmp = 128 + (timeData1[0] - 128) * exaggerate;
+        ctx.lineTo(X_now, tmp * 4);
+        for (var x = 0; x < 1024; x += omitValue) {
+          if (x % omitValue == 0) {
+            LastPoint = 128 + (timeData1[x] - 128) * exaggerate;
+            ctx.lineTo(X_now + x / x1_speed, LastPoint * 4);
+          }
         }
       }
       X_now = X_now + 1024 / x1_speed;
