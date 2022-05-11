@@ -1,34 +1,35 @@
 var AudioContext = window.AudioContext || window.webkitAudioContext || false;
-// 跨瀏覽器
 window.onload = () => {
   document.getElementsByClassName("containers")[0].style.visibility = "visible";
   clearCTX();
   resizeCanvas();
 };
-// 按鈕
+
+// ***可調參數區(直接修改這個區塊)*** 這三個參數
+let omitValue = 1024; // 降低音頻讀取值 (2/4/8/16...1024)(2^10) 越大讀取頻率越低(影響畫布)
+let exaggerate = 3; //震幅誇大比率 (1~10) 1是無任何比率
+let x1_speed = 256; // (2/4/8/16...1024) 影響畫布範圍(線條視覺刷新速度)  數字越大，畫布呈現範圍越大，波型越擠
+
+// 按鈕DOM
 let btn_start = document.getElementById("btn_start");
 let btn_continue = document.getElementById("btn_continue");
 let btn_pause = document.getElementById("btn_pause");
 let btn_long = document.getElementById("btn_long");
 let btn_short = document.getElementById("btn_short");
-// 畫布
+
+// 畫圖canvas參數
 const ctx = document.getElementById("scope").getContext("2d");
-const width = 1024;
-const height = 1024;
-// 畫布x軸 0~1023
-let X_now = 0;
-let omitValue = 1024; // 簡化波形程度
-let exaggerate = 3; //誇大振幅比
-let OverToggle = 0;
+const width = 1024; // 畫布大小
+const height = 1024; // 畫布大小
 let LastPoint = 0;
-// 速度參數 數字越大，畫布呈現範圍越大，波型越擠
-let x1_speed = 256;
+let OverToggle = 0;
+let X_now = 0;
 ctx.fillStyle = "rgb(3,59,80)";
 ctx.strokeStyle = "rgb(1,255,241)";
 ctx.lineWidth = 2;
 var background = new Image();
 background.src = "img/bg_grid.svg";
-// 網頁
+// 頻率接收API內建參數
 var connected = false;
 var context;
 var currentStream;
@@ -42,10 +43,13 @@ var body = document.getElementsByTagName("body");
 var scope = document.getElementById("scope");
 // 布林
 var should_we_STOP = false; //繪圖函數是否該停止
-var Mouse_Down = false; //滑鼠是否按著
-var start = false;
+var Mouse_Down = false; //滑鼠/手指 是否按著螢幕
+var start = false; //是否啟動了?
+// 滑動 連帶 資料讀寫參數
 var posX_Down = 0;
 var now_at = 0;
+
+// 滑鼠 手指 按壓畫布事件
 scope.addEventListener("mousedown", (e) => {
   Mouse_Down = true;
   posX_Down = e.offsetX;
@@ -111,17 +115,8 @@ scope.addEventListener("touchmove", (e) => {
     DBDraw(Math.floor(now_at));
   }
 });
-// DOM
-function buttom_div_width() {
-  return document.getElementById("buttom_div").getBoundingClientRect().width;
-}
-function buttom_div_height() {
-  return document.getElementById("buttom_div").getBoundingClientRect().height;
-}
-function lil_ctn_real_left() {
-  return document.getElementById("lil_ctn").getBoundingClientRect().left - document.getElementById("buttom_div").getBoundingClientRect().left;
-}
-//跑流程
+
+//音頻讀取流程1
 function connectAudioAPI() {
   if (checkScreen() && !start) {
     try {
@@ -139,6 +134,7 @@ function connectAudioAPI() {
     }
   }
 }
+//音頻讀取流程1
 function connectInput() {
   navigator.mediaDevices
     .getUserMedia({ audio: true })
@@ -149,6 +145,7 @@ function connectInput() {
       alert("In connectInput : " + e);
     });
 }
+//音頻讀取流程3
 function gotStream(stream) {
   try {
     mediaSource = context.createMediaStreamSource(stream);
@@ -174,26 +171,31 @@ function gotStream(stream) {
 var database = [];
 function GetData() {
   var timeData1 = new Uint8Array(analyser1.frequencyBinCount);
-  // 將數據 存入 數據陣列 以備未來使用
+  // 檢查線寬
   ChecklineWidth();
-
+  // 將數據 存入 數據陣列 以備未來使用
   database.push(timeData1);
   analyser1.getByteTimeDomainData(timeData1);
   // 取得音頻數據 後 繪製最新數據
   now_at = database.length;
+  // 繪製最新讀取的點
   ContiDraw(now_at);
 }
+// 調整螢幕大小時(拖拉瀏覽器、橫擺畫面)呼叫的函數
 window.addEventListener("resize", resizeCanvas);
 function resizeCanvas() {
+  // 作用:調整畫布長寬，檢查直橫向
   let canvas_cnt = document.getElementsByClassName("canvas_cnt")[0];
   document.getElementById("scope").style.width = canvas_cnt.getBoundingClientRect().width - 90 + "px";
   document.getElementById("scope").style.height = canvas_cnt.getBoundingClientRect().height + "px";
   checkScreen();
 }
+// 清空畫布，只留背景圖
 function clearCTX() {
   ctx.beginPath();
   ctx.drawImage(background, 0, 0, 1024, 1024);
 }
+// 即時繪畫時的算法
 function ContiDraw(xxx) {
   var timeData1 = database[xxx - 1];
 
@@ -218,6 +220,7 @@ function ContiDraw(xxx) {
   X_now = X_now + 1024 / x1_speed;
   ctx.stroke();
 }
+// 拖拉螢幕的畫圖算法
 function DBDraw(xxx) {
   if (xxx - x1_speed < 0) {
   } else {
@@ -246,15 +249,18 @@ function DBDraw(xxx) {
     }
   }
 }
+// 停止按鈕 函數
 function btn_stop() {
   should_we_STOP = true;
 }
+// 啟動按鈕 函數
 function btn_go() {
   should_we_STOP = false;
   if (!start) {
     connectAudioAPI();
   }
 }
+// 加速按鈕 函數
 function speed_fast() {
   if (x1_speed * 2 < 512) {
     x1_speed *= 2;
@@ -263,6 +269,7 @@ function speed_fast() {
   ChecklineWidth();
   DBDraw(Math.floor(now_at));
 }
+// 減速按鈕 函數
 function speed_slow() {
   if (x1_speed / 2 > 1 / 4) {
     x1_speed /= 2;
@@ -271,6 +278,7 @@ function speed_slow() {
   ChecklineWidth();
   DBDraw(Math.floor(now_at));
 }
+// 判別 螢幕 直向 or 橫向
 function checkScreen() {
   let width = body[0].getBoundingClientRect().width;
   let height = body[0].getBoundingClientRect().height;
@@ -283,6 +291,7 @@ function checkScreen() {
   clearCTX();
   return true;
 }
+// 初始化 設定DOM
 setTimeout(() => {
   btn_little = document.getElementById("btn_little");
   btn_big = document.getElementById("btn_big");
@@ -320,11 +329,12 @@ setTimeout(() => {
   checkScreen();
 }, 1000);
 
+// 修改線條粗細 速度128(低速)時候 線條會過粗，將線條調細
 function ChecklineWidth() {
   if (x1_speed >= 128) {
     ctx.lineWidth = 1.5;
   }
-  if (x1_speed < 32) {
+  if (x1_speed < 128) {
     ctx.lineWidth = 3;
   }
 }
