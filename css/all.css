@@ -130,12 +130,17 @@ BODY {
 }
 
 .containers #buttom_div #btn_ctn .control_container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  margin-left: 90px;
 }
 
 .containers #buttom_div #btn_ctn .control_container svg {
@@ -184,15 +189,15 @@ BODY {
     height: 10%;
   }
   .containers .head svg {
-    width: 30px;
+    width: 26px;
   }
   .containers #buttom_div #btn_ctn .feq_container svg {
-    width: 50px;
+    width: 45px;
     margin-left: 2px;
   }
   .containers #buttom_div #btn_ctn .control_container svg {
     margin-left: 5px;
-    width: 50px;
+    width: 45px;
   }
   .containers #buttom_div #btn_ctn h1 {
     font-size: 24px;
@@ -215,7 +220,7 @@ BODY {
     display: flex;
   }
   .containers #buttom_div #btn_ctn .feq_container svg {
-    width: 50px;
+    width: 40px;
     margin-left: 2px;
   }
   .containers #buttom_div #btn_ctn .control_container {
@@ -224,7 +229,7 @@ BODY {
             flex: 1;
   }
   .containers #buttom_div #btn_ctn .control_container svg {
-    width: 45px;
+    width: 35px;
   }
   .containers #buttom_div #btn_ctn h1 {
     line-height: 50%;

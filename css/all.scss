@@ -94,9 +94,10 @@ BODY {
       }
 
       .control_container {
+        flex: 1;
+        justify-content: center;
         display: flex;
         flex-wrap: nowrap;
-        margin-left: 90px;
         svg {
           width: 90px;
         }
@@ -123,6 +124,7 @@ BODY {
   #wave {
     font-size: 16px;
   }
+
   .containers {
     padding-left: 10px;
     padding-right: 10px;
@@ -141,7 +143,7 @@ BODY {
       height: 10%;
 
       svg {
-        width: 30px;
+        width: 26px;
       }
     }
 
@@ -149,7 +151,7 @@ BODY {
       #btn_ctn {
         .feq_container {
           svg {
-            width: 50px;
+            width: 45px;
             margin-left: 2px;
           }
         }
@@ -157,7 +159,7 @@ BODY {
         .control_container {
           svg {
             margin-left: 5px;
-            width: 50px;
+            width: 45px;
           }
         }
 
@@ -190,7 +192,7 @@ BODY {
       #btn_ctn {
         .feq_container {
           svg {
-            width: 50px;
+            width: 40px;
             margin-left: 2px;
           }
         }
@@ -199,7 +201,7 @@ BODY {
           flex: 1;
 
           svg {
-            width: 45px;
+            width: 35px;
           }
         }
 
