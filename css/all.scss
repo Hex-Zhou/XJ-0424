@@ -12,6 +12,9 @@ BODY {
   flex-direction: column;
 }
 
+#wave {
+  font-size: 28px;
+}
 .containers {
   visibility: hidden;
   background-color: #3a4b8e;
@@ -93,7 +96,7 @@ BODY {
       .control_container {
         display: flex;
         flex-wrap: nowrap;
-
+        margin-left: 90px;
         svg {
           width: 90px;
         }
@@ -218,15 +221,13 @@ BODY {
   }
 }
 
-@media screen and (max-width: 900px) {
-  .containers {
-    #buttom_div {
-      #btn_ctn {
-        .control_container {
-          svg {
-          }
-        }
-      }
-    }
+@media screen and (max-width: 800px) {
+  .containers #buttom_div #btn_ctn .control_container {
+    margin-left: 40px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .containers #buttom_div #btn_ctn .control_container {
+    margin-left: 0px;
   }
 }
