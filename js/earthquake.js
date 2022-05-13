@@ -7,7 +7,7 @@ window.onload = () => {
 
 // ***可調參數區(直接修改這個區塊)*** 這三個參數
 let omitValue = 1024; // 降低音頻讀取值 (2/4/8/16...1024)(2^10) 越大讀取頻率越低(影響畫布)
-let exaggerate = 3; //震幅誇大比率 (1~10) 1是無任何比率
+let exaggerate = 15; //震幅誇大比率 (1~10) 1是無任何比率
 let x1_speed = 256; // (2/4/8/16...1024) 影響畫布範圍(線條視覺刷新速度)  數字越大，畫布呈現範圍越大，波型越擠
 
 // 按鈕DOM
@@ -322,7 +322,7 @@ setTimeout(() => {
   });
   btn_big.addEventListener("click", (e) => {
     exaggerate += 0.5;
-    exaggerate = exaggerate >= 10 ? 10 : exaggerate;
+    exaggerate = exaggerate >= 50 ? 50 : exaggerate;
     console.log(exaggerate);
   });
   btn_little.addEventListener("click", (e) => {
