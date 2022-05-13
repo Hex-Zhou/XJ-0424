@@ -2,7 +2,7 @@ BODY {
   margin: 0px;
   padding: 0px;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #3A4B8E;
+  background-color: #3a4b8e;
   color: black;
   font-size: 18px;
   overflow: hidden;
@@ -19,7 +19,7 @@ BODY {
 
 .containers {
   visibility: hidden;
-  background-color: #3A4B8E;
+  background-color: #3a4b8e;
   height: 100vh;
   width: 100vw;
   padding-left: 20px;
@@ -38,7 +38,7 @@ BODY {
       -ms-flex-align: center;
           align-items: center;
   font-size: 48px;
-  color: #3A4B8E;
+  color: #3a4b8e;
   font-weight: 1000;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -147,11 +147,14 @@ BODY {
 
 .containers #buttom_div #btn_ctn h1 {
   font-size: 48px;
-  color: #3A4B8E;
+  color: #3a4b8e;
   font-weight: 1000;
 }
 
 @media screen and (max-height: 600px) {
+  #wave {
+    font-size: 16px;
+  }
   .containers {
     padding-left: 10px;
     padding-right: 10px;
@@ -168,7 +171,7 @@ BODY {
         -ms-flex-align: center;
             align-items: center;
     font-size: 24px;
-    color: #3A4B8E;
+    color: #3a4b8e;
     font-weight: 1000;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -188,7 +191,7 @@ BODY {
   }
   .containers #buttom_div #btn_ctn h1 {
     font-size: 24px;
-    color: #3A4B8E;
+    color: #3a4b8e;
     font-weight: 1000;
     padding-right: 20px;
   }
@@ -222,7 +225,7 @@ BODY {
     line-height: 50%;
     font-size: 24px;
     white-space: nowrap;
-    color: #3A4B8E;
+    color: #3a4b8e;
     font-weight: 1000;
   }
   .containers #buttom_div #btn_ctn .logo svg {

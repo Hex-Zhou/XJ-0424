@@ -7,7 +7,7 @@ window.onload = () => {
 
 // ***可調參數區(直接修改這個區塊)*** 這三個參數
 let omitValue = 1024; // 降低音頻讀取值 (2/4/8/16...1024)(2^10) 越大讀取頻率越低(影響畫布)
-let exaggerate = 15; //震幅誇大比率 (1~10) 1是無任何比率
+let exaggerate = 12; //震幅誇大比率 (1~10) 1是無任何比率
 let x1_speed = 256; // (2/4/8/16...1024) 影響畫布範圍(線條視覺刷新速度)  數字越大，畫布呈現範圍越大，波型越擠
 
 // 按鈕DOM
@@ -41,6 +41,7 @@ var javascriptNode;
 // Dom代稱
 var body = document.getElementsByTagName("body");
 var scope = document.getElementById("scope");
+var waveH2 = document.getElementById("wave");
 // 布林
 var should_we_STOP = false; //繪圖函數是否該停止
 var Mouse_Down = false; //滑鼠/手指 是否按著螢幕
@@ -304,7 +305,7 @@ setTimeout(() => {
   btn_pause = document.getElementById("btn_pause");
   btn_long = document.getElementById("btn_long");
   btn_short = document.getElementById("btn_short");
-
+  waveH2.innerHTML = "強度:" + exaggerate;
   btn_start.addEventListener("click", (e) => {
     connectAudioAPI();
   });
@@ -323,11 +324,13 @@ setTimeout(() => {
   btn_big.addEventListener("click", (e) => {
     exaggerate += 0.5;
     exaggerate = exaggerate >= 50 ? 50 : exaggerate;
+    waveH2.innerHTML = "強度:" + exaggerate;
     console.log(exaggerate);
   });
   btn_little.addEventListener("click", (e) => {
     exaggerate -= 0.5;
     exaggerate = exaggerate <= 1 ? 1 : exaggerate;
+    waveH2.innerHTML = "強度:" + exaggerate;
     console.log(exaggerate);
   });
   checkScreen();

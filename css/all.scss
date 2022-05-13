@@ -1,232 +1,232 @@
 BODY {
-    margin: 0px;
-    padding: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #3A4B8E;
-    color: rgb(0, 0, 0);
-    font-size: 18px;
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #3a4b8e;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
-
 .containers {
-    visibility: hidden;
-    background-color: #3A4B8E;
-    height: 100vh;
-    width: 100vw;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
+  visibility: hidden;
+  background-color: #3a4b8e;
+  height: 100vh;
+  width: 100vw;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
 
-    .head {
-        .title {
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-        }
-
-        svg {
-            width: 72px;
-            margin-left: 5px;
-            cursor: pointer;
-        }
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 48px;
-        color: #3A4B8E;
-        font-weight: 1000;
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;
-        background-color: #fff;
-        height: 10%;
+  .head {
+    .title {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
-    .canvas_cnt {
-        height: 60%;
+    svg {
+      width: 72px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #3a4b8e;
+    font-weight: 1000;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: #fff;
+    height: 10%;
+  }
+
+  .canvas_cnt {
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+  }
+
+  #buttom_div {
+    height: 25%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+
+    div {
+      padding-top: 15px;
+      padding-bottom: 25px;
+    }
+
+    #btn_ctn {
+      padding-right: 50px;
+      padding-left: 50px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-left: 15px;
+        cursor: pointer;
+      }
+
+      .feq_container {
         display: flex;
-        justify-content: center;
-        background-color: #fff;
+        flex-wrap: nowrap;
+
+        svg {
+          width: 110px;
+        }
+      }
+
+      .control_container {
+        display: flex;
+        flex-wrap: nowrap;
+
+        svg {
+          width: 90px;
+        }
+      }
+
+      .logo {
+        margin-left: auto;
+
+        svg {
+          width: 400px;
+        }
+      }
+
+      h1 {
+        font-size: 48px;
+        color: #3a4b8e;
+        font-weight: 1000;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 600px) {
+  #wave {
+    font-size: 16px;
+  }
+  .containers {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+
+    .head {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      color: #3a4b8e;
+      font-weight: 1000;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      background-color: #fff;
+      height: 10%;
+
+      svg {
+        width: 30px;
+      }
     }
 
     #buttom_div {
-        height: 25%;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        background-color: #fff;
-
-        div {
-            padding-top: 15px;
-            padding-bottom: 25px;
+      #btn_ctn {
+        .feq_container {
+          svg {
+            width: 50px;
+            margin-left: 2px;
+          }
         }
 
-        #btn_ctn {
-
-            padding-right: 50px;
-            padding-left: 50px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-
-            svg {
-                margin-left: 15px;
-                cursor: pointer;
-            }
-
-            .feq_container {
-                display: flex;
-                flex-wrap: nowrap;
-
-                svg {
-                    width: 110px;
-                }
-            }
-
-            .control_container {
-                display: flex;
-                flex-wrap: nowrap;
-
-                svg {
-                    width: 90px;
-                }
-            }
-
-            .logo {
-                margin-left: auto;
-
-                svg {
-                    width: 400px;
-                }
-            }
-
-            h1 {
-                font-size: 48px;
-                color: #3A4B8E;
-                font-weight: 1000;
-            }
+        .control_container {
+          svg {
+            margin-left: 5px;
+            width: 50px;
+          }
         }
+
+        h1 {
+          font-size: 24px;
+          color: #3a4b8e;
+          font-weight: 1000;
+          padding-right: 20px;
+        }
+
+        .logo {
+          svg {
+            width: 200px;
+          }
+        }
+      }
     }
+  }
 }
 
-
-@media screen and (max-height:600px) {
-    .containers {
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 10px;
-
-        .head {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            color: #3A4B8E;
-            font-weight: 1000;
-            border-top-right-radius: 10px;
-            border-top-left-radius: 10px;
-            background-color: #fff;
-            height: 10%;
-
-            svg {
-                width: 30px;
-            }
-        }
-
-        #buttom_div {
-            #btn_ctn {
-                .feq_container {
-                    svg {
-                        width: 50px;
-                        margin-left: 2px;
-                    }
-                }
-
-                .control_container {
-                    svg {
-                        margin-left: 5px;
-                        width: 50px;
-                    }
-                }
-
-                h1 {
-                    font-size: 24px;
-                    color: #3A4B8E;
-                    font-weight: 1000;
-                    padding-right: 20px;
-                }
-
-                .logo {
-                    svg {
-                        width: 200px;
-                    }
-                }
-            }
-        }
+@media screen and (max-height: 400px) {
+  .containers {
+    .head {
+      font-size: 30px;
     }
+
+    #buttom_div {
+      display: flex;
+
+      #btn_ctn {
+        .feq_container {
+          svg {
+            width: 50px;
+            margin-left: 2px;
+          }
+        }
+
+        .control_container {
+          flex: 1;
+
+          svg {
+            width: 45px;
+          }
+        }
+
+        h1 {
+          line-height: 50%;
+          font-size: 24px;
+          white-space: nowrap;
+          color: #3a4b8e;
+          font-weight: 1000;
+        }
+
+        .logo {
+          svg {
+            width: 150px;
+          }
+        }
+      }
+    }
+  }
 }
 
-@media screen and (max-height:400px) {
-    .containers {
-        .head {
-            font-size: 30px;
+@media screen and (max-width: 900px) {
+  .containers {
+    #buttom_div {
+      #btn_ctn {
+        .control_container {
+          svg {
+          }
         }
-
-        #buttom_div {
-            display: flex;
-
-            #btn_ctn {
-                .feq_container {
-                    svg {
-                        width: 50px;
-                        margin-left: 2px;
-                    }
-                }
-
-                .control_container {
-                    flex: 1;
-
-                    svg {
-                        width: 45px;
-                    }
-                }
-
-                h1 {
-                    line-height: 50%;
-                    font-size: 24px;
-                    white-space: nowrap;
-                    color: #3A4B8E;
-                    font-weight: 1000;
-                }
-
-                .logo {
-                    svg {
-                        width: 150px;
-                    }
-                }
-            }
-        }
+      }
     }
-}
-
-@media screen and (max-width:900px) {
-    .containers {
-        #buttom_div {
-            #btn_ctn {
-                .control_container {
-                    svg {}
-                }
-            }
-        }
-    }
+  }
 }
