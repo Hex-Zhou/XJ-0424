@@ -63,8 +63,6 @@ scope.addEventListener("mouseout", () => {
 scope.addEventListener("mousemove", (e) => {
   if (Mouse_Down) {
     should_we_STOP = true;
-    // numbers = (posX_Down - e.offsetX) / scope.getBoundingClientRect().width / 3;
-    // now_at = now_at + x1_speed * numbers;
     let pos_move = e.offsetX;
     if (x1_speed === 4) {
       now_at = posX_Down - pos_move > 0 ? now_at + 1 / 8 : now_at - 1 / 8;
@@ -184,10 +182,12 @@ function GetData() {
 // 調整螢幕大小時(拖拉瀏覽器、橫擺畫面)呼叫的函數
 window.addEventListener("resize", resizeCanvas);
 function resizeCanvas() {
-  // 作用:調整畫布長寬，檢查直橫向
+  // 作用:調整畫布長寬
   let canvas_cnt = document.getElementsByClassName("canvas_cnt")[0];
-  document.getElementById("scope").style.width = canvas_cnt.getBoundingClientRect().width - 90 + "px";
+  document.getElementById("scope").style.width =
+    canvas_cnt.getBoundingClientRect().width - 90 + "px";
   document.getElementById("scope").style.height = canvas_cnt.getBoundingClientRect().height + "px";
+  // 檢查直橫向
   checkScreen();
 }
 // 清空畫布，只留背景圖
@@ -204,7 +204,7 @@ function ContiDraw(xxx) {
     X_now = 0;
   }
   OverToggle++;
-  if (OverToggle % 8 == 0) {
+  if (OverToggle % 1024 == 0) {
     ctx.lineTo(X_now, LastPoint * 4);
   } else {
     tmp = 128 + (timeData1[0] - 128) * exaggerate;
@@ -232,7 +232,7 @@ function DBDraw(xxx) {
         X_now = 0;
       }
       OverToggle++;
-      if (OverToggle % 8 == 0) {
+      if (OverToggle % 1024 == 0) {
         ctx.lineTo(X_now, LastPoint * 4);
       } else {
         tmp = 128 + (timeData1[0] - 128) * exaggerate;
@@ -269,17 +269,21 @@ function speed_fast() {
   ChecklineWidth();
   DBDraw(Math.floor(now_at));
 }
-// 減速按鈕 函數
+// 減速按鈕 功能
 function speed_slow() {
+  // 最低限速 0.5
   if (x1_speed / 2 > 1 / 4) {
     x1_speed /= 2;
     console.log(x1_speed);
   }
+  // 檢查線寬
   ChecklineWidth();
+  // 畫 非即時圖
   DBDraw(Math.floor(now_at));
 }
 // 判別 螢幕 直向 or 橫向
 function checkScreen() {
+  // 檢查直橫向 > 直向隱藏畫布 橫向展示畫布>刷新畫布以符合視窗大小
   let width = body[0].getBoundingClientRect().width;
   let height = body[0].getBoundingClientRect().height;
   if (height > width) {
